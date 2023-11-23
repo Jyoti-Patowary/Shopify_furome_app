@@ -7,108 +7,13 @@ const apiVersion = '2023-10';
 
 const graphqlUrl = `https://${storeName}/admin/api/${apiVersion}/graphql.json`;
 
-
-// const productMutation = `
-//   mutation CreateProduct($input: ProductInput!) {
-//     productCreate(input: $input) {
-//       product {
-//         id
-//         title
-//         handle
-//         status
-//         variants(first: 10) {
-//           edges {
-//             node {
-//               id
-//               price
-//               barcode
-//               createdAt
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
-// `;
-
-// const productInput = {
-//   title: 'Your Product Title',
-//   variants: [{ price: 99.99 }],
-// };
-
-// fetch(graphqlUrl, {
-//   method: 'POST',
-//   headers: {
-//     'Content-Type': 'application/json',
-//     'X-Shopify-Access-Token': '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',
-//   },
-//   body: JSON.stringify({
-//     query: productMutation,
-//     variables: { input: productInput },
-//   }),
-// })
-//   .then(response => {
-//     if (response.ok) {
-//       return response.json();
-//     } else {
-//       throw new Error('Failed to create product');
-//     }
-//   })
-//   .then(data => {
-//     console.log('Product created:', data);
-//   })
-//   .catch(error => {
-//     console.error('Error creating product:', error);
-//   });
-
-
-
-
-
-// Function to get the current app installation ID
-// async function getGraphql() {
-//   const query = `
-//     {
-//       currentAppInstallation {
-//         id
-//       }
-//     }
-//   `;
-
-//   const requestOptions = {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//       'X-Shopify-Access-Token': apiKey,
-//     },
-//     body: JSON.stringify({ query }),
-//   };
-
-//   try {
-//     const response = await fetch(graphqlUrl, requestOptions);
-//     const data = await response.text();
-
-//     if (data.errors) {
-//       console.error('Error:', data.errors);
-//       return null;
-//     }
-
-//     return data.data.currentAppInstallation.id;
-//   } catch (error) {
-//     console.error('GraphQL request error:', error);
-//     return null;
-//   }
-// }
-
 async function getGraphql(query) {
   let options = {
-    'mode': 'no-cors',
-    'async': true,
-    'crossDomain': true,
+    "redirect": 'follow',
     'method': 'POST',
     'headers': {
-      'X-Shopify-Access-Token': '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',
-      'Content-type': 'application/graphql',
+      'X-Shopify-Access-Token': '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',//'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',
+      'Content-Type': 'application/json',
     },
     'body': query
   };
@@ -118,89 +23,59 @@ async function getGraphql(query) {
 
 
 // // Function to update app data and Firebase
-async function updateAppDataAndFirebase(petName) {
+async function updateAppDataAndFirebase(petName = 'Tommy') {
   try {
-    // Update app data as an app-data metafield
+    let petObj = [{ name: petName }];
+    let metafieldKey = 'pet_info'
 
-    const shopifyMutationVariables = {
-      input: [
-        {
-          namespace: 'custom',
-          key: 'pet_information',
-          ownerId: `gid://shopify/Product/8546018361649`,
-          type: 'json_string',
-          value: JSON.stringify({
-            name: petName,
-            yob: '',
-            picture: '',
-            reports: [{ id: '', date: '', status: '' }, { id: '', date: '', status: '' }],
-          }),
-        },
-      ],
-    };
-
-    // const shopifyGql = `
-    // mutation MyMutation {
-    //   metafieldsSet(
-    //     metafields: {ownerId: "gid://shopify/Product/8546018361649", key: "pet_information", value: "
-    //     ${JSON.stringify({
-    //       name: petName,
-    //       yob: '',
-    //       picture: '',
-    //       reports: [{ id: '', date: '', status: '' }, { id: '', date: '', status: '' }],
-    //     })},", namespace: "custom"}
-    //   ) {
-    //     metafields {
-    //       id
-    //       createdAt
-    //       key
-    //       value
-    //       namespace
-    //       id
-    //     }
-    //   }
-    // }
-    // `;
-
-    // let mutation = `
-    // {
-    //   "query":  ${shopifyGql},
-    //   "variables": ${JSON.stringify(shopifyMutationVariables)}
-    // }
-    
-    // `
-    const shopifyGql = `
-    mutation MyMutation($petName: String!) {
-      metafieldsSet(
-        metafields: {
-          ownerId: "gid://shopify/Product/8546018361649",
-          key: "pet_information",
-          value: "${JSON.stringify({
-            name: petName,
-            yob: '',
-            picture: '',
-            reports: [{ id: '', date: '', status: '' }, { id: '', date: '', status: '' }],
-          })}",
-          namespace: "custom"
-        }
-      ) {
-        metafields {
-          id
-          createdAt
-          key
-          value
-          namespace
+    //get previous pets in the same product
+    const queryExistingPets = {
+      query: `query MyQuery {
+        product(id: "gid://shopify/Product/8546018361649") {
+          metafields(namespace: "custom", first: 5) {
+            nodes {
+              value
+              key
+            }
+          }
         }
       }
+  `,
+      variables: {}
+    };
+
+    const resultPets = await getGraphql(JSON.stringify(queryExistingPets));
+    const existingPetString = resultPets?.data?.product?.metafields?.nodes?.find(item => item.key == metafieldKey)?.value || encodeURIComponent(JSON.stringify([]))
+    const existingPet = JSON.parse(decodeURIComponent(existingPetString));
+    petObj = [...existingPet, ...petObj]
+    // Update app data as an app-data metafield
+
+    const shopifyGql = {
+      query: `mutation MyMutation {
+        metafieldsSet(
+          metafields: {ownerId: "gid://shopify/Product/8546018361649", key: "pet_info", value: "${encodeURIComponent(JSON.stringify(petObj))}", namespace: "custom"}
+        ) {
+          metafields {
+        createdAt
+        key
+        value
+        namespace
+        id
+      }
     }
-  `;
-  
- 
-  
+  }
+  `,
+      variables: {}
+    };
+
+
+
 
     // Update app data as an app-data metafield
-    const shopifyResult = await getGraphql(shopifyGql, { petName });
-    console.log('Shopify Metafield Update Result:', shopifyResult);
+    const shopifyResult = await getGraphql(JSON.stringify(shopifyGql));
+    const fetchedPetsString = shopifyResult?.data?.metafieldsSet?.metafields?.[0]?.value;
+    const fetchedPetsObj = JSON.parse(decodeURIComponent(fetchedPetsString))
+    console.log('Shopify Metafield Update Result:', fetchedPetsObj);
 
     // Store the petName data in Firebase Firestore
     const docRef = await addDoc(collection(db, 'pets'), { petName });
@@ -213,9 +88,9 @@ async function updateAppDataAndFirebase(petName) {
 
 // // Event listener for when the input value changes
 document.getElementById('addPetOn').addEventListener('click', async function (event) {
-  const petNameValue = event.target.value;
-
-    updateAppDataAndFirebase(petNameValue);
+  const petNameValue = document.getElementById("petName")?.value;
+  console.log({ petNameValue })
+  updateAppDataAndFirebase(petNameValue);
 });
 
 
