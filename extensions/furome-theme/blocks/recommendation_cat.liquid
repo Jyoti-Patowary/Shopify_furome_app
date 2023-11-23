@@ -1,0 +1,30 @@
+{% # theme-check-disable %}
+
+{% schema %}
+{
+  "name": "Recommendation Cat",
+  "target": "section",
+  "stylesheet": "Recommendations.css",
+  "javascript": "app.js",
+  "settings": []
+}
+{% endschema %}
+
+<div class="container-xxl">
+  <div class="box">
+    <div class="row">
+      <div class="col-md-10 col-sm-12">
+        <h3 class="text-heading">
+          <span> 
+          <img src="{{ "Group 10.png" | asset_img_url: '515x' }}" height="25" width="25" loading="lazy">
+          <h1 style="color: #7FC8E3 !important">Recommendations</h1>
+        </span>
+        </h3>
+        <div class="pt-3"></div>
+      </div>
+      <div class="col-md-2 col-sm-12">
+        <img src="{{ "bottle.png" | asset_img_url: '515x' }}" height="185" width="155" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div>

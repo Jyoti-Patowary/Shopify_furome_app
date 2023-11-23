@@ -1,0 +1,100 @@
+.box{
+    background-color: F9F6F3;
+    margin: 20px 0px;
+    padding: 20px 40px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 12px 2px #FE755A26;
+}
+
+.box .text-heading{
+    color: #FE755A;
+}
+
+.progress-box {
+    padding: 50px 0px;
+    display: flex;
+    /* flex-direction: row; */
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 0;
+  }
+
+  #disease{
+    display: flex;
+  }
+
+  .span{
+    color: #3fc7f9 !important;
+  }
+  
+  .circle-wrap {
+    margin: 40px auto;
+    width: 200px; /* Increase the width and height for a larger circular progress bar */
+    height: 200px;
+    background: #fefcff;
+    border-radius: 50%;
+    border: 1px solid #cdcbd0;
+  }
+  
+  .circle-wrap .circle .mask,
+  .circle-wrap .circle .fill {
+    width: 200px; /* Adjust the width and height */
+    height: 200px;
+    position: absolute;
+    border-radius: 50%;
+  }
+  
+  .circle-wrap .circle .mask {
+    clip: rect(0px, 200px, 200px, 100px);
+  }
+  
+  .circle-wrap .inside-circle {
+    width: 162px; /* Adjust the width and height for the inner circle */
+    height: 162px;
+    border-radius: 50%;
+    background: #d2eaf1;
+    line-height: 160px;
+    text-align: center;
+    margin-top: 19px;
+    margin-left: 19px;
+    color: #1e51dc;
+    position: absolute;
+    z-index: 100;
+    font-weight: 700;
+    font-size: 2em;
+  }
+  
+  .label {
+    font-size: medium;
+  }
+
+  .inside-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* color animation */
+  
+  /* 3rd progress bar */
+  .mask .fill {
+    clip: rect(0px, 100px, 200px, 0px);
+    background-color: #227ded;
+  }
+  
+  .mask.full,
+  .circle .fill {
+    animation: fill ease-in-out 3s;
+    transform: rotate(135deg);
+  }
+  
+  @keyframes fill {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(135deg);
+    }
+  }
+  

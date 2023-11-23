@@ -1,0 +1,131 @@
+{% # theme-check-disable %}
+
+<div class="main-hero">
+  <div class="content container">
+    <div class="left">
+      <div class="welcome">
+        <p class="welcome-message">Welcome,{{ customer.id }} 
+        {% comment %} <span id="userName"></span> {% endcomment %}
+      </p>
+      </div>
+    </div>
+    <div class="right">
+      <div class="select">
+        <select class="form-select" aria-label="Default select example" id="petSelect" onchange="handleSelectChange(this)">
+          <option selected>Select</option>
+          <option id="Dog">Dog</option>
+          <option id="Cat">Cat</option>
+          <option id="AddNewPet">Add New Pet</option>
+        </select>
+        <button type="button" class="btn btn-primary addReport" data-bs-toggle="modal" data-bs-target="#addReportModal">
+          Add Report
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add New Pet Modal -->
+{% comment %} <div class="modal fade" id="addPetModal" tabindex="-1" aria-labelledby="addReportLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addReportLabel">Add New Pet</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="petName" class="form-label">Pet Name</label>
+          {% comment %} {%raw%} page.metafields.custom.pet_name.value {%endraw%} {% endcomment %}
+          <input type="text" class="form-control" id="petName" data-pet-name="{{ page.metafields.custom.pet_name.value.name | escape }}">
+          {{page.metafields.custom.pet_name.value.name }}
+        </div>
+        <div class="mb-3">
+          <label for="petImage" class="form-label">Pet Image</label>
+          <input type="file" class="form-control" id="petImageInput" accept="image/*">
+          <img src="" alt="Pet Image" id="petImagePreview" style="max-width: 100%; display: none;">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="addPet()">Add Pet</button>
+      </div>
+    </div>
+  </div>
+</div> {% endcomment %}
+
+{% comment %} updated with metafield entry {% endcomment %}
+<div class="modal fade" id="addPetModal" tabindex="-1" aria-labelledby="addReportLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addReportLabel">Add New Pet</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="petName" class="form-label">Pet Name</label>
+          <input type="text" class="form-control" id="petName" value="{{ page.metafields.custom.pet_name.value.name | escape }}">
+        </div>
+        <div class="mb-3">
+          <label for="petImage" class="form-label">Pet Image</label>
+          <img src="{{ page.metafields.custom.pet_image.value.image_url | escape }}" alt="Pet Image" id="petImagePreview" style="max-width: 100%;">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="addPetOn">Add Pet</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Add Report Modal -->
+<div class="modal fade" id="addReportModal" tabindex="-1" aria-labelledby="addReportLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addReportLabel">Search Report</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class= "modal-body">
+        <p class="modal-text-p">Please enter the report ID below to list your pet's report</p>
+        <input class="form-control form-control-sm" type="text" id="addReportSearch">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="addReport()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+
+<div class="all-report" id="all-report">
+  
+</div>
+
+<script>
+  function handleSelectChange(select) {
+    const selectedOption = select.options[select.selectedIndex];
+    console.log("sele", selectedOption )
+    if (selectedOption.id === "AddNewPet") {
+      // Open the modal
+      $('#addPetModal').modal('show');
+      // Reset the select to the default option
+      select.selectedIndex = 0;
+    }
+  }
+
+  function addReport() {
+    // Handle the add report functionality here
+  }
+</script> 
+
+{% schema %}
+{
+  "name": "Pets Dashboard",
+  "target": "section",
+  "stylesheet": "pets.css",
+  "javascript": "functions.js",
+  "settings": []
+}
+{% endschema %}

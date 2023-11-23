@@ -1,0 +1,58 @@
+{% # theme-check-disable %}
+
+{% schema %}
+{
+  "name": "Metabolites Cat",
+  "target": "section",
+  "stylesheet": "metabolites_page.css",
+  "javascript": "wellness.js",
+  "settings": []
+}
+{% endschema %}
+
+<div class="height">
+  <img
+    src="{{ "Ellipse 5.png" | asset_img_url: '1515x' }}"
+    id="imageE"
+    style="width: 100%;"
+    height="300"
+    width="100"
+    loading="lazy"
+  >
+
+  {% comment %} Header {% endcomment %}
+  <div class="container-xxl">
+    <div class="box1">
+      <div>
+        <h3>Metabolites</h3>
+      </div>
+      <div>
+        <img src="{{ "v1051-54 [Converted] 1.png" | asset_img_url: '515x' }}" height="200" width="151" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div>
+{% comment %} Header end {% endcomment %}
+
+{% comment %} table {% endcomment %}
+
+<div class="box">
+  <div class="search-bar">
+    <input type="text" id="search-input" placeholder="Search..." style="width: 100%;">
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr></tr>
+    </tbody>
+  </table>
+</div>
+<div class="bone">
+  <img src="{{ "catWool.png" | asset_img_url: '515x' }}" height="325" style="max-width: 100%;">
+</div>

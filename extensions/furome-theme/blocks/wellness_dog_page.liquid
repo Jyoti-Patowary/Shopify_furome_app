@@ -1,0 +1,97 @@
+{% # theme-check-disable %}
+
+{% schema %}
+{
+  "name": "Wellness Page Header",
+  "target": "section",
+  "stylesheet": "wellnessPageHeader.css",
+  "javascript": "wellness.js",
+  "settings": []
+}
+{% endschema %}
+
+<div class="height">
+  <img
+    src="{{ "Ellipse 5.png" | asset_img_url: '1515x' }}"
+    id="imageE"
+    style="width: 100%;"
+    height="300"
+    width="100"
+    loading="lazy"
+  >
+
+{% comment %} Header {% endcomment %}
+  <div class="container-xxl">
+    <div class="box1">
+      <div>
+        <h3>Cancer Risk</h3>
+        <span class="circle"><p>Normal</p></span>
+      </div>
+      <div>
+        <img src="{{ "v1051-54 [Converted] 1.png" | asset_img_url: '515x' }}" height="200" width="151" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div>
+{% comment %} Header end {% endcomment %}
+
+{% comment %} Chart {% endcomment %}
+<div class="container-xxl">
+    <div class="box">
+        <h3 class="text-heading">
+            <span> <img src="{{ "Group 10.png" | asset_img_url: '515x' }}" height="25" width="25" loading="lazy"></span>
+            Where Lomi Stands
+          </h3>
+<div class="chart">
+    <canvas id="myChart" style="width:100%;max-width:700px">
+
+    </canvas>
+</div>
+          
+
+
+    </div>
+</div>
+
+{% comment %} Chart end {% endcomment %}
+
+{% comment %} Background {% endcomment %}
+<div class="container-xxl">
+  <div class="box">
+    <h3 class="text-heading">
+      <span> <img src="{{ "Group 10.png" | asset_img_url: '515x' }}" height="25" width="25" loading="lazy"></span>
+      Background
+    </h3>
+    <p class="pt-3">
+      In order to get Lomi’s compound profile closer to that of another dog around his approximate age we recommend
+      considering diets that leads to an increase in Adenosine, Cytidine, and Orotic acid and decrease in Citric acid,
+      Purine, and Uridine.
+    </p>
+  </div>
+</div>
+
+{% comment %} Background end {% endcomment %}
+
+{% comment %} Recommendation Section {% endcomment %}
+<div class="container-xxl">
+  <div class="box">
+    <div class="row">
+      <div class="col-md-10 col-sm-12">
+        <h3 class="text-heading">
+          <span> <img src="{{ "Group 10.png" | asset_img_url: '515x' }}" height="25" width="25" loading="lazy"></span>
+          Recommendations
+        </h3>
+        <p class="pt-3">
+          In order to get Lomi’s compound profile closer to that of another dog around his approximate age we recommend
+          considering diets that leads to an increase in Adenosine, Cytidine, and Orotic acid and decrease in Citric
+          acid, Purine, and Uridine.
+        </p>
+      </div>
+      <div class="col-md-2 col-sm-12">
+        <img src="{{ "bottle.png" | asset_img_url: '515x' }}" height="185" width="155" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div>
+
+{% comment %} Recommendation end {% endcomment %}

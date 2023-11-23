@@ -1,0 +1,72 @@
+{% # theme-check-disable %}
+ 
+ {% schema %}
+{
+  "name": "Circular cat",
+  "target": "section",
+  "stylesheet": "progress.css",
+  "javascript": "functions.js",
+  "settings": []
+}
+{% endschema %}
+
+<div class="container-xxl">
+    <div class="box">
+        <p id="disease">Learn more about our methods here</p>
+        {% comment %} Progress circle {% endcomment %}
+        <div class="progress-box">
+            {% comment %} 1st Bar {% endcomment %}
+            <div class="circle-wrap">
+                <div class="circle">
+                    <div class="mask full">
+                        <div class="fill"></div>
+                    </div>
+                    <div class="mask half">
+                        <div class="fill"></div>
+                    </div>
+                    <div class="inside-circle">
+                        <div class="percentage">75%</div>
+                        {% comment %} <div class="label">Age</div> {% endcomment %}
+                    </div>
+                </div>
+            </div>
+            {% comment %} End {% endcomment %}
+        
+            {% comment %} 2nd Bar {% endcomment %}
+            <div class="circle-wrap">
+                <div class="circle">
+                    <div class="mask full">
+                        <div class="fill"></div>
+                    </div>
+                    <div class="mask half">
+                        <div class="fill"></div>
+                    </div>
+                    <div class="inside-circle">
+                        <div class="percentage">50%</div>
+                        {% comment %} <div class="label">Progress</div> {% endcomment %}
+                    </div>
+                </div>
+            </div>
+            {% comment %} End {% endcomment %}
+        
+            {% comment %} 3rd Bar {% endcomment %}
+            <div class="circle-wrap">
+                <div class="circle">
+                    <div class="mask full">
+                        <div class="fill"></div>
+                    </div>
+                    <div class="mask half">
+                        <div class="fill"></div>
+                    </div>
+                    <div class="inside-circle">
+                        <div class="percentage">90%</div><br/>
+                        {% comment %} <div class="label">Skills</div> {% endcomment %}
+                    </div>
+                </div>
+            </div>
+            {% comment %} End {% endcomment %}
+        </div>
+        
+        {% comment %} Progress End {% endcomment %}
+</div>
+</div>

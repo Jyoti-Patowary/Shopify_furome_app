@@ -1,0 +1,87 @@
+.box{
+    background-color: F9F6F3;
+    margin: 20px 0px;
+    padding: 20px 40px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 12px 2px #FE755A26;
+}
+
+.box .text-heading {
+  color: #FE755A;
+  transform: translateX(-16px);
+}
+
+.w-header{
+  transform: translate(-14px, 2px);
+  color: #FE755A;
+  display: flex;
+  align-items: baseline;
+}
+
+
+
+.box .filter-name{
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 20px;
+    color: #FE755A;
+    border-bottom: 1px solid #E6E6E6;
+} 
+
+.box .disease-box {
+    margin: 20px 15px;
+    padding: 10px;
+    width: 191px;
+    height: 98px;
+    border-radius: 12px;
+    border: 1px solid #C3E6F3;
+    background-color: #C3E6F3;
+    z-index: 0;
+}
+
+.disease-box {
+    width: 300px;
+    height: 40px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .progress-bar-container {
+    height: 7%;
+    width: 84%;
+    position: absolute;
+    top: 49px;
+    background-color: #fff;
+  }
+  
+  .progress-bar {
+    height: 100%;
+    width: 0;
+    background-color: #2EC224;
+    transition: width 0.5s;
+  }
+  
+  .tooltip {
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #2EC224;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.5s;
+    white-space: nowrap;
+  }
+
+  .disease-text{
+    text-align: center;
+    padding-top: 10px;
+    font-weight: 500;
+  }
+  
+  

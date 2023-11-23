@@ -1,0 +1,372 @@
+body {
+    background-color: #F9F6F3;
+}
+
+/* #profile-c {
+  height: 50% !important;
+} */
+
+.eclipse{
+    height: 56em;
+    font-family: poppins;
+}
+
+.container-c {
+    position: relative;
+    top: -195px;
+    padding: 0px 100px;
+  }
+  
+  .main-header-c {
+    z-index: 1;
+    margin: 0 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .summary-section {
+    background-color: white;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    border-radius: 10px;
+    margin: inherit;
+    
+  }
+
+  .summary-text {
+    display: flex;
+    align-items: center;
+
+  }
+  
+  .summary-section h1 {
+    color: orange;
+    font-size: 45px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal; 
+  }
+
+  .summary-section p{
+    font-size: 16px;
+    text-align: justify;
+    line-height: 27.5px;
+  }
+
+  .profile-name {
+    width: 215px;
+    text-align: center;
+  }
+
+  .profile-name h1{
+    font-size: 25px;
+    color: white;
+    font-weight: 700;
+  }
+
+  .profile-name p {
+    font-size: 15.5px;
+    color: #ffffff;
+  }
+      
+  @media only screen and (max-width: 600px) {
+    .eclipse{
+      height: 38em;
+  }
+  
+  .container-c {
+      position: relative;
+      top: -295px;
+      padding: 0px 100px;
+    }
+    
+    .main-header-c {
+      z-index: 1;
+      margin: 0 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    
+    .summary-section {
+      background-color: white;
+      width: 100%;
+      height: auto;
+      padding: 20px;
+      border-radius: 10px;
+      margin: inherit;
+      
+    }
+  
+    .summary-text {
+      display: flex;
+      align-items: center;
+  
+    }
+    
+    .summary-section h1 {
+      color: orange;
+      font-size: 45px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal; 
+    }
+  
+    .summary-section p{
+      font-size: 16px;
+      text-align: justify;
+      line-height: 27.5px;
+    }
+  
+    .profile-name {
+      width: 215px;
+      text-align: center;
+    }
+  
+    .profile-name h1{
+      font-size: 25px;
+      color: white;
+      font-weight: 700;
+    }
+  
+    .profile-name p {
+      font-size: 15.5px;
+      color: #ffffff;
+    }
+  }
+  /* Wellness section */
+
+  .wellness-box {
+    margin: 0px 100px;
+    background-color: white;
+    border-radius: 20px;
+    border: 4px solid #f1f1f19c;
+    top: -421px;
+    position: relative;
+    box-shadow: 1px 0px 0px #f1f1f19c;
+    padding: 30px 50px;
+}
+
+.w-header-s {
+    color: orange;
+    font-size: 45px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.n-filter p {
+    text-align: end;
+}
+
+
+
+/* Style the list items within the wellness box */
+.d-box li {
+  list-style: none;
+  padding: 10px;
+  background-color: aliceblue;
+  border-radius: 10px;
+  text-align: center;
+  width: 12em;
+  border: 1px solid #add8fe;
+}
+
+.d-box ul{
+  display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+/* Style the tooltip element */
+.d-box .tooltip {
+  display: contents;
+  
+  color: rgb(192, 10, 10);
+  padding: 3px 10px;
+  border-radius: 5px;
+  margin-right: 10px;
+  
+}
+
+/* Style the progress bar container */
+.d-box .progress-bar {
+  width: 100%;
+  height: 6px;
+  background-color: #d6d0d0;
+  border-radius: 5px;
+  margin-top: 5px;
+  flex: 3; /* Takes up more space for the progress bar */
+}
+
+/* Style the progress bar itself */
+.d-box .progress {
+  height: 100%;
+  background-color: #208d57;
+  border-radius: 5px;
+}
+
+/* Style the disease text */
+.d-box .disease {
+  margin-top: 18px;
+  font-weight: 600;
+  flex: 1; /* Takes up available space for the disease text */
+}
+
+a {
+  color: rgb(166, 166, 245);
+}
+
+.p-bar{
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.circle-wrap {
+  margin: 40px auto;
+  width: 150px;
+  height: 150px;
+  background: #fefcff;
+  border-radius: 50%;
+  border: 1px solid #cdcbd0;
+}
+
+.circle-wrap .circle .mask,
+.circle-wrap .circle .fill {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  border-radius: 50%;
+}
+
+.circle-wrap .circle .mask {
+  clip: rect(0px, 150px, 150px, 75px);
+}
+
+.circle-wrap .inside-circle {
+  width: 122px;
+  height: 122px;
+  border-radius: 50%;
+  background: #d2eaf1;
+  line-height: 120px;
+  text-align: center;
+  margin-top: 14px;
+  margin-left: 14px;
+  color: #1e51dc;
+  position: absolute;
+  z-index: 100;
+  font-weight: 700;
+  font-size: 2em;
+}
+
+/* color animation */
+
+/* 3rd progress bar */
+.mask .fill {
+  clip: rect(0px, 75px, 150px, 0px);
+  background-color: #227ded;
+}
+
+.mask.full,
+.circle .fill {
+  animation: fill ease-in-out 3s;
+  transform: rotate(135deg);
+}
+
+@keyframes fill{
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(135deg);
+  }
+}
+
+h1{
+  color: orange;
+}
+
+.r-section {
+  display: flex;
+  justify-content: space-between;
+  gap: 88px;
+  padding-top: 20px;
+}
+
+.r-section p{
+  font-size: 16px;
+    text-align: justify;
+    line-height: 27.5px;
+}
+
+.r-section img{
+  position: relative;
+  top: -38px;
+}
+
+#disclaimerContent .hidden {
+  display: none;
+}
+
+.bone {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Cancer Risk */
+
+
+/* Metabolites */
+
+/* Style for the c-box */
+.c-box {
+  background-color: #f1f1f1;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+/* Style for the search bar */
+.search-bar {
+  margin-bottom: 20px;
+}
+
+/* Style for the demo table */
+.demo-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.demo-table th, .demo-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+.demo-table th {
+  background-color: #333;
+  color: #fff;
+}
+
+.demo-table th, .demo-table td {
+  width: 33.33%;
+}
+
+.demo-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.demo-table tr:hover {
+  background-color: #ddd;
+}
+
+.c-box .bone {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  bottom: 298px;
+
+}
+

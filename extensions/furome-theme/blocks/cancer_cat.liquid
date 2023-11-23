@@ -1,0 +1,75 @@
+{% comment %} theme-check-disable {% endcomment %}
+
+{% schema %}
+{
+  "name": "Cancer Cat",
+  "target": "section",
+  "stylesheet": "cancer.css",
+  "javascript": "cancer.js",
+  "settings": [
+    { "label": "Text", "id": "text", "type": "text", "default": "autofil" }
+  ]
+}
+{% endschema %}
+
+<div class="Cheader">
+  <img src="{{ 'catEllipse 5.png' | asset_img_url: '515x' }}" height="200" width="auto" loading="lazy">
+</div>
+
+<div class="c-container">
+  <div class="c-header-text">
+    <h1>Cancer Risk</h1>
+    <div class="span-text">
+      <span></span>
+      <p>Normal</p>
+    </div>
+  </div>
+  <div class="image">
+    <img src="{{ 'cat.png' | asset_img_url: '515x' }}" height="131" width="120" loading="lazy">
+  </div>
+</div>
+
+<div class="container-xxl">
+  <div class="box">
+    <h3 class="text-heading">
+      <span><img src="{{ 'Group 10.png' | asset_img_url: '515x' }}" height="25" width="25" loading="lazy">
+      <h1 style="color: #7FC8E3">Where Lomi Stands</h1>
+    </span>
+    </h3>
+    <div class="chart">
+      <canvas id="myChart" style="width:100%"></canvas>
+    </div>
+  </div>
+</div>
+
+<div class="container-xxl">
+  <div class="box">
+    <h3 class="text-heading">
+      <span><img src="{{ 'Group 10.png' | asset_img_url: '515x' }}" height="25" width="25" loading="lazy">
+      <h1 style="color: #7FC8E3">Background</h1>
+    </span>
+    </h3>
+    <p class="pt-3">
+      In order to get Lomi’s compound profile closer to that of another dog around his approximate age, we recommend considering diets that lead to an increase in Adenosine, Cytidine, and Orotic acid and a decrease in Citric acid, Purine, and Uridine.
+    </p>
+  </div>
+</div>
+
+<div class="container-xxl">
+  <div class="box">
+    <div class="row">
+      <div class="col-md-10 col-sm-12">
+        <h3 class="text-heading">
+          <span> 
+          <img src="{{ "Group 10.png" | asset_img_url: '515x' }}" height="25" width="25" loading="lazy">
+          <h1 style="color: #7FC8E3">Recommendations</h1>
+        </span>
+        </h3>
+        <div class="pt-3"></div>
+      </div>
+      <div class="col-md-2 col-sm-12">
+        <img src="{{ "bottle.png" | asset_img_url: '515x' }}" height="185" width="155" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div>

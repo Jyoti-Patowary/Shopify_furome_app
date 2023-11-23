@@ -1,0 +1,33 @@
+{% # theme-check-disable %}
+ 
+ {% schema %}
+{
+  "name": "Bone",
+  "target": "section",
+  "stylesheet": "recommendations.css",
+  "javascript": "functions.js",
+  "settings": []
+}
+{% endschema %}
+
+<style>
+    .bone {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    @media (max-width: 768px) {
+        .bone {
+            justify-content: center; /* Center the content */
+        }
+
+        .bone img {
+            max-width: 100px; /* Set a smaller max-width for the image */
+            height: auto; /* Maintain aspect ratio */
+        }
+    }
+</style>
+
+<div class="bone">
+    <img src="{{ "bone.png" | asset_img_url: '515x' }}" height="325" width="425" loading="lazy">
+</div>

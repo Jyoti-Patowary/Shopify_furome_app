@@ -1,0 +1,44 @@
+{% # theme-check-disable %}
+
+
+{% schema %}
+{
+  "name": "Summary Cat",
+  "target": "section",
+  "stylesheet": "summary.css",
+  "javascript": "app.js",
+  "settings": []
+}
+{% endschema %}
+
+
+<div>
+  <img src="{{ "catEllipse 5.png" | asset_img_url: '1515x' }}" id="imageE" style="width: 100%;" height="300" width="100" loading="lazy">
+  
+  <div class="container-xxl">
+    <div class="row box1">
+      <div class="col-md-2 col-sm-12 image">
+        <img src="" id="profile-C" height="100" width="100" loading="lazy">
+        <div class="profile-name">
+          <h3></h3>
+          <p class="button-S"></p>
+        </div>
+      </div>
+  
+      <div class="col-md-8 col-sm-12">
+        <div class="summary-text">
+          <div class="summary-header">
+            <img src="{{ "Group 10.png" | asset_img_url: '515x' }}" height="25" width="25" loading="lazy">
+          <h1 style="color: #7FC8E3">Summary</h1>
+          </div>
+          <p></p>
+        </div>
+      </div>
+  
+      <div class="col-md-2 col-sm-12 d-none d-md-block image-dog">
+        <img src="{{ "cat.png" | asset_img_url: '515x' }}" height="100" width="100" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div>
+   

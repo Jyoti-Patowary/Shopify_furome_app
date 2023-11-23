@@ -1,0 +1,64 @@
+{% # theme-check-disable %}
+ 
+ {% schema %}
+{
+  "name": "Wellness Cat",
+  "target": "section",
+  "stylesheet": "wellnessDashboard.css",
+  "javascript": "app.js",
+  "settings": []
+}
+{% endschema %}
+
+<div>
+    <div class="container-xxl">
+      <div class="box">
+        <div class="w-header">
+          <span> <img src="{{ "Group 10.png" | asset_img_url: '515x' }}" height="25" width="25" loading="lazy">
+          <h1 class="text-heading" id="wellness" style="color: #7FC8E3">
+            Wellness
+          </h1></span>
+         
+      </div>
+      <p class="filter-name">
+        Name <i class="bi bi-funnel-fill"></i>
+      </p>
+      <div class="disease-box">
+        <div class="progress-bar-container" id="sortableList">
+          <div class="progress-bar" id="progress-bar"></div>
+          <div class="tooltip" id="tooltip">0%</div>
+          <div class="disease-text">Disease</div>
+        </div>
+      </div>
+      
+      </div>
+    </div>
+</div>
+
+  {% comment %} <script>
+    // Simulate data fetching (between 10% to 100%)
+    const progressBar = document.getElementById("progress-bar");
+    const tooltip = document.getElementById("tooltip");
+  
+    let currentProgress = 10; // Starting point
+  
+    function updateProgressBar() {
+      progressBar.style.width = currentProgress + "%";
+      tooltip.textContent = currentProgress + "%";
+      tooltip.style.opacity = 1;
+    }
+  
+    // Simulate data fetching and update the progress bar
+    function simulateDataFetching() {
+      const interval = setInterval(function () {
+        currentProgress += 5; // Increase the progress by 5% in this example
+        if (currentProgress > 10) {
+          clearInterval(interval);
+        }
+        updateProgressBar();
+      }, 1000); // Adjust the interval and update as needed
+    }
+  
+    simulateDataFetching();
+  </script> {% endcomment %}
+  
