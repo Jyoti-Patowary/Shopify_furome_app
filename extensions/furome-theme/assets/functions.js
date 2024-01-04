@@ -1,212 +1,146 @@
 // Shopify API Call
 
+// window.onload = function () {
 const apiKey = '856f6c386e8c2ad7e66cc0097748cf2a';
 const password = 'ef7700fb26f4867d0f23737f549b93a1';
 const storeName = 'quickstart-b37ce774.myshopify.com';
 const apiVersion = '2023-10';
 
-const graphqlUrl = `https://${storeName}/admin/api/${apiVersion}/graphql.json`;
+const baseUrl = `https://${storeName}/apps/express-proxy`
+let MODAL_STATE = LOADER_STATE = { HIDE: 'hide', SHOW: 'show' }
 
-async function getGraphql(query) {
-  let options = {
-    "redirect": 'follow',
-    'method': 'POST',
-    'headers': {
-      'X-Shopify-Access-Token': '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',//'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',
-      'Content-Type': 'application/json',
-    },
-    'body': query
-  };
-  let response = (await fetch(graphqlUrl, options)).json();
-  return response;
+function resolveUrl(path) {
+  return `${baseUrl}${path}`;
 }
 
+function showLoader(status) {
+  let loader = document?.getElementById("cloader");
+  if (status == LOADER_STATE.SHOW) {
+    loader.classList.add('loader-status-show');
+    return;
+  }
+  loader.classList.remove('loader-status-show')
+}
+let Loader = {
+  show: showLoader.bind(this, LOADER_STATE.SHOW),
+  hide: showLoader.bind(this, LOADER_STATE.HIDE)
+}
+
+function toast(message, status) {
+  $("#pet-toast-body").text(message)
+  $("#pet-toast").addClass(`alert-${status}`);
+  $("#pet-toast").css({ display: "inline-block" })
+  setTimeout(() => {
+    $("#pet-toast").removeClass(`alert-${status}`);
+    $("#pet-toast").css({ display: "none" })
+  }, 5000)
+}
+
+function toggleModal(modalId, state = "hide") {
+  $(`#${modalId}`).modal(state);
+  // let addReportModalBt = document.getElementById(modalBtnId);
+  // addReportModalBt.addEventListener("click", () => {
+  //   $(`#${modalId}`).modal(state);
+  // })
+}
 
 // // Function to update app data and Firebase
-async function updateAppDataAndFirebase(petName = 'Tommy') {
+async function updateAppDataAndFirebase(petInformation) {
   try {
-    let petObj = [{ name: petName }];
-    let metafieldKey = 'pet_info'
+    let petObj = [petInformation];
+    Loader.show();
+    await (await fetch(resolveUrl('/petinformation'), {
+      method: "PUT",
+      headers: {
+        "ngrok-skip-browser-warning": true,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(petObj),
+    }))?.json()
+    Loader.hide();
+    toast('Pet added succesfully', 'success')
+    toggleModal("addPetModal", MODAL_STATE.HIDE)
 
-    //get previous pets in the same product
-    const queryExistingPets = {
-      query: `query MyQuery {
-        product(id: "gid://shopify/Product/8546018361649") {
-          metafields(namespace: "custom", first: 5) {
-            nodes {
-              value
-              key
-            }
-          }
-        }
-      }
-  `,
-      variables: {}
-    };
-
-    const resultPets = await getGraphql(JSON.stringify(queryExistingPets));
-    const existingPetString = resultPets?.data?.product?.metafields?.nodes?.find(item => item.key == metafieldKey)?.value || encodeURIComponent(JSON.stringify([]))
-    const existingPet = JSON.parse(decodeURIComponent(existingPetString));
-    petObj = [...existingPet, ...petObj]
-    // Update app data as an app-data metafield
-
-    const shopifyGql = {
-      query: `mutation MyMutation {
-        metafieldsSet(
-          metafields: {ownerId: "gid://shopify/Product/8546018361649", key: "pet_info", value: "${encodeURIComponent(JSON.stringify(petObj))}", namespace: "custom"}
-        ) {
-          metafields {
-        createdAt
-        key
-        value
-        namespace
-        id
-      }
-    }
-  }
-  `,
-      variables: {}
-    };
-
-
-
-
-    // Update app data as an app-data metafield
-    const shopifyResult = await getGraphql(JSON.stringify(shopifyGql));
-    const fetchedPetsString = shopifyResult?.data?.metafieldsSet?.metafields?.[0]?.value;
-    const fetchedPetsObj = JSON.parse(decodeURIComponent(fetchedPetsString))
-    console.log('Shopify Metafield Update Result:', fetchedPetsObj);
-
-    // Store the petName data in Firebase Firestore
-    const docRef = await addDoc(collection(db, 'pets'), { petName });
-    console.log('Pet Name Metafield Updated and Data Stored in Firebase!');
-    console.log('Firebase Document Reference:', docRef.id);
   } catch (error) {
+    toast('Unable to add pet', 'danger')
     console.error('Error updating app data or storing in Firebase:', error);
   }
 }
 
-// // Event listener for when the input value changes
-document.getElementById('addPetOn').addEventListener('click', async function (event) {
-  const petNameValue = document.getElementById("petName")?.value;
-  console.log({ petNameValue })
-  updateAppDataAndFirebase(petNameValue);
-});
-
-
-// async function fetchProduct() {
-//   try {
-//     const productQuery = `
-//          query {
-//           mutation CreateMetafieldDefinition($definition: collection.metafields.custom.add_pet) {
-//             metafieldDefinitionCreate(definition: $definition) {
-//               createdDefinition {
-//                 id
-//                 name
-//                 image
-//               }
-//               userErrors {
-//                 field
-//                 message
-//                 code
-//               }
-//             }
-//           }
-
-//         //  products(first : 10) {
-//         //        edges {
-//         //            node {
-//         //                id
-//         //                title
-//         //            }
-//         //        }
-//         //    }
-//        }
-//        `;
-
-
-
-
-
-//     console.log("My Products", await getGraphql(productQuery))
-//   } catch (error) {
-//     console.error('Error fetching data:', error);
-//   }
-// }
-
-// fetchProduct();
-
-
-
-// Shopify API Call Ends
-
-// async function getUserDocById(userId) {
-//     const docRef = doc(db, "users");
-//     docSnap = await getDoc(docRef);
-//     if (docSnap.exists()) {
-//         console.log("Document data:", docSnap.data());
-//     } else {
-//         // docSnap.data() will be undefined in this case
-//         console.log("No such document!");
-//     }
-// }
-
-// getUserDocById();
-
-// Login Check session and firebase
-
-async function fetchAndDisplayUserName() {
-  const userDataString = sessionStorage.getItem('user');
-
-  if (userDataString) {
-    const userData = JSON.parse(userDataString);
-    const userUid = userData.uid;
-
-    try {
-      const userRef = doc(db, 'users', userUid);
-      const userDoc = await getDoc(userRef);
-
-      console.log("userRef", userRef)
-      if (userDoc.exists()) {
-        const displayName = userDoc.data().first_name;
-
-        console.log(displayName)
-        const userNameElement = document.getElementById("userName");
-        if (userNameElement) {
-          userNameElement.textContent = displayName || "Guest";
-        }
-      } else {
-        console.log("User data not found in the database.");
-      }
-    } catch (error) {
-      console.error('Error fetching user data from the database:', error);
-    }
-  }
-}
-document.addEventListener('DOMContentLoaded', function () {
-  fetchAndDisplayUserName();
-});
-
-//Login Check End
-
-
-async function getUserDocById(reportId) {
+async function addReports(reportId) {
   try {
-    const docRef = doc(db, "report", reportId);
-    const docSnap = await getDoc(docRef);
-
-    console.log("doc", docRef)
-    if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
-    } else {
-      console.log("No such document!");
-    }
-  } catch (error) {
-    console.error("Error fetching user document:", error);
+    console.log({ reportId })
+    let report_id = document.getElementById("addReportSearch")?.value || reportId;
+    let pet_id = document.getElementById("petSelect").value;
+    let response = await (await fetch(resolveUrl("/pet/report"), {
+      method: "PUT",
+      headers: {
+        "ngrok-skip-browser-warning": true,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        report_id,
+        pet_id
+      }),
+    }))?.json();
+    //fetch added report
+    Loader.show();
+    let report = await (await fetch(resolveUrl(`/report/${response.data.report_id}`), {
+      method: "GET",
+      headers: {
+        "ngrok-skip-browser-warning": true,
+        "Content-Type": "application/json"
+      },
+    }))?.json();
+    constructReports([report?.data || {}])
+    Loader.hide();
+    toast('Report added succesfully', 'success')
+    toggleModal("addReportModal", MODAL_STATE.HIDE)
+  } catch (err) {
+    $("#pet-toast-body").text('Unable to add report')
+    toast('Unable to add report', 'danger')
+    console.error('Error updating app data or storing in Firebase:', err);
   }
 }
 
-// getUserDocById("1tisgYFkniT24Y0IPuV3");
+document.getElementById("petSelect")?.addEventListener("select", function (e) {
+  handleSelectChange(e)
+})
+//handle pet select
+async function handleSelectChange(select) {
+  const selectedOption = select.options[select.selectedIndex];
+  if (selectedOption.id === "AddNewPet") {
+    // Open the modal
+    $('#addPetModal').modal('show');
+    // Reset the select to the default option
+    select.selectedIndex = 0;
+  } else if (selectedOption.value) {
+    Loader.show();
+    let { data = [] } = await (await fetch(resolveUrl(`/reports/pet/${selectedOption.value}`, selectedOption), {
+      method: "GET",
+      headers: {
+        "ngrok-skip-browser-warning": true,
+        "Content-Type": "application/json"
+      },
+    }))?.json();
+    constructReports(data);
+    Loader.hide()
+  }
+}
+
+document.getElementById("addReportToPet")?.addEventListener('click', function () {
+  addReports()
+})
+
+// // Event listener for when the input value changes
+document.getElementById('addPetOn')?.addEventListener('click', async function (event) {
+  const name = document.getElementById("petName")?.value;
+  const yob = document.getElementById('yob').value;
+  const pet_species = document.getElementById('type').value;
+  const pet_image = document.getElementById('petImage').value;
+  updateAppDataAndFirebase({ name, yob, pet_species, pet_image });
+});
+
 
 function getQueryParams() {
   var queryParams = {};
@@ -221,129 +155,44 @@ function getQueryParams() {
   return queryParams;
 }
 
-//   Asynchronous function to fetch user document by ID
-async function getUserDocById(userId) {
-  try {
-    const docRef = doc(db, "users", userId);
-    const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
-    } else {
-      console.log("No such document!");
-    }
-  } catch (error) {
-    console.error("Error fetching user document:", error);
+function constructReports(reports = []) {
+  const reportsContainer = document.getElementById("all-report");
+  reportsContainer.innerHTML = ''
+  if (!reports.length) {
+    reportsContainer.innerHTML = '<div><h4>No reports found!!!</h4></div>>';
+    return
   }
+  reports.map((doc, index) => {
+    const data = doc;
+    reportFound = true;
+    const reportDiv = document.createElement("div");
+    const reportTitle = data.reportTitle || `Monthly Report ${index + 1}`;
+    reportDiv.className = "m-report p-4";
+
+
+    let summaryPage = '/pages/summary';
+    if (data.species === 'dog') {
+      summaryPage = '/pages/dog_summary';
+    } else if (data.species === 'cat') {
+      summaryPage = '/pages/cat_summary';
+    }
+
+
+
+    reportDiv.innerHTML += `
+                  <h4>${reportTitle}</h4>
+                  <br/>
+                  <p><strong>Name:</strong> ${data.name || 'N/A'}</p>
+                  <p><strong>Age:</strong> ${data.age || 'N/A'}</p>
+                  <p><strong>Date:</strong> ${data.date ? new Date(data.date.seconds * 1000).toDateString() : 'N/A'}</p>
+                  <p><strong>Species:</strong> ${data.species || 'N/A'}</p>
+                  <p><strong>Month:</strong> ${data.month ? new Date(data.month.seconds * 1000).getMonth() + 1 : 'N/A'}</p>
+                  <br/>
+                  <a class="btn btn-primary" href="#">Download</a>
+                  <a class="btn btn-secondary" href="${summaryPage}?report_id=${data.id}" target="_blank">Open Report</a>
+              `;
+
+    reportsContainer?.appendChild(reportDiv);
+  });
 }
-
-
-
-
-
-
-// Display monthly reports New
-async function displayMonthlyReports(report_id) {
-  try {
-    const reportsContainer = document.getElementById("all-report");
-    reportsContainer.innerHTML = ''; // Clear existing content
-
-    const search = document.getElementById("addReportSearch").value;
-
-    if (!search) {
-      console.log("Search input field is empty.");
-      return;
-    }
-
-    const reportCollectionRef = collection(db, "report");
-
-    const querySnapshot = await getDocs(reportCollectionRef);
-    let index = 0;
-    let reportFound = false;
-
-    querySnapshot.forEach((doc) => {
-      const data = doc.data();
-      console.log("data", data)
-      if (data.report_id === search) {
-        reportFound = true;
-        console.log("data", data.report_id)
-        const reportDiv = document.createElement("div");
-        const reportTitle = data.reportTitle || `Monthly Report ${index + 1}`;
-        reportDiv.className = "m-report p-4";
-
-
-        let summaryPage = '/pages/summary';
-        if (data.species === 'dog') {
-          summaryPage = '/pages/dog_summary';
-        } else if (data.species === 'cat') {
-          summaryPage = '/pages/cat_summary';
-        }
-
-
-
-        reportDiv.innerHTML += `
-                    <h4>${reportTitle}</h4>
-                    <br/>
-                    <p><strong>Name:</strong> ${data.name || 'N/A'}</p>
-                    <p><strong>Age:</strong> ${data.age || 'N/A'}</p>
-                    <p><strong>Date:</strong> ${data.date ? new Date(data.date.seconds * 1000).toDateString() : 'N/A'}</p>
-                    <p><strong>Species:</strong> ${data.species || 'N/A'}</p>
-                    <p><strong>Month:</strong> ${data.month ? new Date(data.month.seconds * 1000).getMonth() + 1 : 'N/A'}</p>
-                    <br/>
-                    <a class="btn btn-primary" href="#">Download</a>
-                    <a class="btn btn-secondary" href="${summaryPage}?report_id=${data.report_id}" target="_blank">Open Report</a>
-                `;
-
-        reportsContainer?.appendChild(reportDiv);
-        index++;
-      }
-    });
-
-    if (!reportFound) {
-      console.log("No report found with the provided report ID: " + search);
-      console.log("Report IDs in the Firestore collection:");
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        console.log(data);
-        console.log(data.report_id);
-      });
-    } else {
-      console.log("Report data fetched and displayed successfully");
-    }
-  } catch (error) {
-    console.error("Error fetching report data:", error);
-  }
-}
-
-// Wait for the DOM to be ready
-document.addEventListener("DOMContentLoaded", function () {
-  // Find the search input element
-  const searchInput = document.getElementById("addReportSearch");
-
-  if (searchInput) {
-    // Check if the search input element exists
-    // Set its value to an empty string
-    searchInput.value = "";
-
-    // Attach an event listener to the "Save Changes" button
-    const saveChangesButton = document.querySelector("#addReportModal .btn-primary");
-    if (saveChangesButton) {
-      saveChangesButton.addEventListener("click", function () {
-        const search = searchInput.value;
-        console.log("Search value: ", search);
-
-        if (search) {
-          displayMonthlyReports(search);
-
-          // Close the modal after clicking "Save Changes"
-          const addReportModal = new bootstrap.Modal(document.getElementById("addReportModal"));
-          addReportModal.hide();
-          console.log("Modal closed after fetching and displaying report data");
-        }
-      });
-    }
-  } else {
-    console.log("Search input element with ID 'addReportSearch' not found.");
-  }
-});
-

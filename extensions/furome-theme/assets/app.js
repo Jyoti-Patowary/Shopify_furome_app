@@ -1,55 +1,52 @@
 document.addEventListener("DOMContentLoaded", async function () {
+  const storeName = 'quickstart-b37ce774.myshopify.com';
+
+  const baseUrl = `https://${storeName}/apps/express-proxy`
+  function resolveUrl(path) {
+    return `${baseUrl}${path}`;
+  }
+
   const urlParams = new URLSearchParams(window.location.search);
   const reportID = urlParams.get('report_id');
 
-  console.log("Report ID:", reportID);
-
   if (reportID !== null) {
     try {
-      const reportCollectionRef = collection(db, "report");
-      const querySnapshot = await getDocs(reportCollectionRef);
-
-      let reportFound = false;
-
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        if (data.report_id === reportID) {
-          reportFound = true;
-          document.querySelector('.profile-name h3').textContent = data.header || 'Header not available';
-          document.querySelector('.profile-name p').textContent = data.button || 'Button text not available';
-          document.querySelector('.summary-text p').innerHTML = data.summary || 'Summary not available';
-          document.querySelector('.pt-3').innerHTML = data.recommendations || 'Click here to see recommendations';
-          document.querySelector('.accordion-body').innerHTML = data.disclaimer || 'Disclaimer not available';
-          document.getElementById('profile-C').src = data.image || 'default_image_url';
+      let { data } = await (await fetch(resolveUrl(`/report/${reportID}`), {
+        headers: {
+          "ngrok-skip-browser-warning": true,
+          "Content-Type": "application/json"
+        },
+      }))?.json()
+      document.querySelector('.profile-name h3').textContent = data.header || 'Header not available';
+      document.querySelector('.profile-name p').textContent = data.button || 'Button text not available';
+      document.querySelector('.summary-text p').innerHTML = data.summary || 'Summary not available';
+      document.querySelector('.pt-3').innerHTML = data.recommendations || 'Click here to see recommendations';
+      document.querySelector('.accordion-body').innerHTML = data.disclaimer || 'Disclaimer not available';
+      document.getElementById('profile-C').style.backgroundImage = `url(${data.image})` || 'default_image_url';
 
 
 
-          const wellnessElement = document.querySelector('#wellness');
-          wellnessElement.addEventListener('click', function() {
-            if (reportID) {
-              const url = `/pages/metabolites?report_id=${reportID}`;
-              // window.open(url, '_blank');
-              window.location.href = url;
-            } else {
-              console.log('No report ID available to fetch metabolites.');
-            }
-          });
-
-          const diseaseElement = document.getElementById('disease');
-          diseaseElement.addEventListener('click', function () {
-            if (reportID) {
-              const url = `/pages/wellness?report_id=${reportID}`;
-              window.location.href = url; 
-            } else {
-              console.log('No report ID available to fetch wellness data.');
-            }
-          });
+      const wellnessElement = document.querySelector('#wellness');
+      wellnessElement.addEventListener('click', function () {
+        if (reportID) {
+          const url = `/pages/metabolites?report_id=${reportID}`;
+          // window.open(url, '_blank');
+          window.location.href = url;
+        } else {
+          console.log('No report ID available to fetch metabolites.');
         }
       });
 
-      if (!reportFound) {
-        console.log('Report not found.');
-      }
+      const diseaseElement = document.getElementById('disease');
+      diseaseElement.addEventListener('click', function () {
+        if (reportID) {
+          const url = `/pages/wellness?report_id=${reportID}`;
+          window.location.href = url;
+        } else {
+          console.log('No report ID available to fetch wellness data.');
+        }
+      });
+
     } catch (error) {
       console.error('Error fetching data from Firebase:', error);
     }

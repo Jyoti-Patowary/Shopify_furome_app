@@ -2,7 +2,7 @@
 
 name = "furome-app"
 client_id = "45edeefd9b05b17e057d3c92e75533a6"
-application_url = "https://tba-optimal-biographies-precision.trycloudflare.com"
+application_url = "https://payable-danny-county-outdoor.trycloudflare.com"
 embedded = true
 
 [access_scopes]
@@ -11,10 +11,10 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://tba-optimal-biographies-precision.trycloudflare.com/auth/callback",
-  "https://tba-optimal-biographies-precision.trycloudflare.com/auth/shopify/callback",
-  "https://tba-optimal-biographies-precision.trycloudflare.com/api/auth/callback",
-  "https://tba-optimal-biographies-precision.trycloudflare.com/.shopify/graphiql/auth/callback"
+  "https://payable-danny-county-outdoor.trycloudflare.com/auth/callback",
+  "https://payable-danny-county-outdoor.trycloudflare.com/auth/shopify/callback",
+  "https://payable-danny-county-outdoor.trycloudflare.com/api/auth/callback",
+  "https://payable-danny-county-outdoor.trycloudflare.com/.shopify/graphiql/auth/callback"
 ]
 
 [webhooks]

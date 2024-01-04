@@ -11,53 +11,45 @@ if (reportID) {
 }
 
 async function fetchMetabolites(reportID) {
+  const storeName = 'quickstart-b37ce774.myshopify.com';
+
+  const baseUrl = `https://${storeName}/apps/express-proxy`
+
+  function resolveUrl(path) {
+    return `${baseUrl}${path}`;
+  }
+
   try {
-    const reportQuery = query(collection(db, 'report'), where('report_id', '==', reportID));
-    const reportSnapshot = await getDocs(reportQuery);
+    let { data: metabolitesSnapshot = [] } = await (await fetch(resolveUrl(`/report/metabolites/${reportID}`), {
+      headers: {
+        "ngrok-skip-browser-warning": true,
+        "Content-Type": "application/json"
+      },
+    }))?.json();
 
-    if (!reportSnapshot.empty) {
-      reportSnapshot.forEach((reportDoc) => {
-        const reportData = reportDoc.data();
-        console.log('Report found:', reportDoc.id, reportData);
 
-        const metabolitesRef = collection(reportDoc.ref, 'metabolites');
-        getDocs(metabolitesRef).then((metabolitesSnapshot) => {
-          if (!metabolitesSnapshot.empty) {
-            displayMetabolitesTable(metabolitesSnapshot); 
-            enableSearch(); 
-          } else {
-            console.log('No metabolites found for this report.');
-          }
-        }).catch((error) => {
-          console.error('Error fetching metabolites:', error);
-        });
-      });
-    } else {
-      console.log('No report with provided ID found.');
-    }
+    displayMetabolitesTable(metabolitesSnapshot);
+    enableSearch();
+
   } catch (error) {
     console.error('Error fetching report:', error);
   }
 }
 
-function displayMetabolitesTable(metabolitesSnapshot) {
+function displayMetabolitesTable(metabolitesSnapshot = []) {
   const tableBody = document.querySelector('.table tbody');
 
-  metabolitesSnapshot.forEach((metaboliteDoc) => {
-    const metaboliteData = metaboliteDoc.data();
-
- 
+  console.log({ tableBody })
+  metabolitesSnapshot.map((metaboliteData) => {
     const row = document.createElement('tr');
 
-  
     row.innerHTML = `
       <td>${metaboliteData.name}</td>
       <td>${metaboliteData.category}</td>
       <td>${metaboliteData.score || "N/A"}</td>
     `;
 
-  
-    tableBody.appendChild(row);
+    tableBody?.appendChild(row);
   });
 }
 
@@ -71,7 +63,7 @@ function enableSearch() {
     tableRows.forEach((row) => {
       const text = row.textContent.toLowerCase();
       if (text.includes(searchText)) {
-        row.style.display = ''; 
+        row.style.display = '';
       } else {
         row.style.display = 'none';
       }

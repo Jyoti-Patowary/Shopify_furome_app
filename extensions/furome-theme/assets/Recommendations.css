@@ -1,4 +1,4 @@
-.box{
+.box {
     background-color: F9F6F3;
     margin: 20px 0px;
     padding: 20px 40px;
@@ -6,26 +6,27 @@
     box-shadow: 0px 0px 12px 2px #FE755A26;
 }
 
-span{
+span {
     color: #FE755A;
     display: flex;
     align-items: center;
-    transform: translateX(12px);
+    margin-left: 5px;
+    cursor: pointer;
+    text-decoration: underline;
 }
 
-.inside-box{
+.inside-box {
     display: flex;
-    padding: 20px 0px;  
+    padding: 20px 0px;
 }
 
-.text-heading h1{
+.text-heading h1 {
     transform: translate(-14px, 2px);
     color: #FE755A !important;
 }
 
 @media (max-width: 768px) {
-    .accordion-item{
+    .accordion-item {
         padding: 0px;
     }
 }
-

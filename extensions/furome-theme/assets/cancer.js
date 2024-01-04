@@ -1,5 +1,16 @@
 const xValues = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
+
+const storeName = 'quickstart-b37ce774.myshopify.com';
+const apiVersion = '2023-10';
+
+const baseUrl = `https://${storeName}/apps/express-proxy`
+
+function resolveUrl(path) {
+  return `${baseUrl}${path}`;
+}
+
+
 document.addEventListener('DOMContentLoaded', async function () {
   const urlParams = new URLSearchParams(window.location.search);
   const reportID = urlParams.get('report_id');
@@ -16,23 +27,16 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 async function fetchWellnessData(reportID) {
   try {
-    const reportQuery = query(collection(db, 'report'), where('report_id', '==', reportID));
-    const reportSnapshot = await getDocs(reportQuery);
 
-    if (!reportSnapshot.empty) {
-      const reportDoc = reportSnapshot.docs[0]; // Assuming there's only one document for the provided reportID
-      const wellnessRef = collection(reportDoc.ref, 'wellness');
-      const wellnessSnapshot = await getDocs(wellnessRef);
+    let { data: wellnessSnapshot = [] } = await (await fetch(resolveUrl(`/report/wellness/${reportID}`), {
+      headers: {
+        "ngrok-skip-browser-warning": true,
+        "Content-Type": "application/json"
+      },
+    }))?.json();
 
-      if (!wellnessSnapshot.empty) {
-        displayWellnessData(wellnessSnapshot);
-        populateChartWithData(wellnessSnapshot);
-      } else {
-        console.log('No wellness data found for this report.');
-      }
-    } else {
-      console.log('No report with the provided ID found.');
-    }
+    displayWellnessData(wellnessSnapshot);
+    populateChartWithData(wellnessSnapshot);
   } catch (error) {
     console.error('Error fetching report or wellness data:', error);
   }
@@ -40,38 +44,34 @@ async function fetchWellnessData(reportID) {
 
 async function fetchReportData(reportID) {
   try {
-    const reportQuery = query(collection(db, 'report'), where('report_id', '==', reportID));
-    const reportSnapshot = await getDocs(reportQuery);
-
-    if (!reportSnapshot.empty) {
-      const reportDoc = reportSnapshot.docs[0];
-      const data = reportDoc.data();
-      console.log("data", data)
-      document.querySelector('.pt-3').innerHTML = data.recommendations || 'Click here to see recommendations';
-    } else {
-      console.log('No report with the provided ID found.');
-    }
+    let { data } = await (await fetch(resolveUrl(`/report/${reportID}`), {
+      headers: {
+        "ngrok-skip-browser-warning": true,
+        "Content-Type": "application/json"
+      },
+    }))?.json();
+    console.log("data", data)
+    document.querySelector('.pt-3').innerHTML = data.recommendations || 'Click here to see recommendations';
   } catch (error) {
     console.error('Error fetching report data:', error);
   }
 }
 
-function displayWellnessData(snapshot) {
+function displayWellnessData(snapshot = []) {
   console.log('Wellness Collection Data:');
-  snapshot.forEach((doc) => {
-    const data = doc.data();
-    console.log('Wellness data:', doc.id, data);
+  snapshot.map((data) => {
+    console.log('Wellness data:', data);
   });
 }
 
 function populateChartWithData(wellnessSnapshot) {
-  const numericalData = wellnessSnapshot.docs.map((doc) => {
-    const data = doc.data();
-    return data.value; 
+  const numericalData = wellnessSnapshot.map((data) => {
+    return data.value;
   });
 
   new Chart('myChart', {
     type: 'line',
+    responsive: true,
     data: {
       labels: xValues,
       datasets: [

@@ -1,10 +1,20 @@
 {% # theme-check-disable %}
+<div role="alert" style="position : absolute; top: 50px; right : 10px;display : none" class="alert" id="pet-toast">
+  <div class="toast-body" id="pet-toast-body">
+  </div>
+</div>
+
+<div class="loader-status" id="cloader">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
 
 <div class="main-hero">
   <div class="content container">
     <div class="left">
       <div class="welcome">
-        <p class="welcome-message">Welcome,{{ customer.id }} 
+        <p class="welcome-message">Welcome,{{ customer.name }} 
         {% comment %} <span id="userName"></span> {% endcomment %}
       </p>
       </div>
@@ -12,12 +22,11 @@
     <div class="right">
       <div class="select">
         <select class="form-select" aria-label="Default select example" id="petSelect" onchange="handleSelectChange(this)">
-          <option selected>Select</option>
-          <option id="Dog">Dog</option>
-          <option id="Cat">Cat</option>
-          <option id="AddNewPet">Add New Pet</option>
         </select>
-        <button type="button" class="btn btn-primary addReport" data-bs-toggle="modal" data-bs-target="#addReportModal">
+        {% comment %} <button type="button" class="btn btn-primary addReport"  id="AddNewPet">
+          Add New Pet
+        </button>{% endcomment %}
+        <button type="button" class="btn btn-primary addReport" id="addReportModalBtn">
           Add Report
         </button>
       </div>
@@ -67,7 +76,20 @@
           <input type="text" class="form-control" id="petName" value="{{ page.metafields.custom.pet_name.value.name | escape }}">
         </div>
         <div class="mb-3">
+          <label for="yob" class="form-label">Year of Birth</label>
+          <input type="text" class="form-control" id="yob" value="{{ page.metafields.custom.pet_name.value.yob | escape }}">
+        </div>
+        <div class="mb-3">
+          <label for="type" class="form-label">Pet Species</label>
+          <select class="form-select" aria-label="Pet Species" id="type">
+            <option selected disabled>Select</option>
+            <option id="Dog">Dog</option>
+            <option id="Cat">Cat</option>
+          </select>
+        </div>
+        <div class="mb-3">
           <label for="petImage" class="form-label">Pet Image</label>
+          <input type="file" class="form-control" id="petImage" placeholder="Enter Pet Image URL" multiple>
           <img src="{{ page.metafields.custom.pet_image.value.image_url | escape }}" alt="Pet Image" id="petImagePreview" style="max-width: 100%;">
         </div>
       </div>
@@ -92,7 +114,7 @@
         <input class="form-control form-control-sm" type="text" id="addReportSearch">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" onclick="addReport()">Save changes</button>
+        <button type="button" class="btn btn-primary" id="addReportToPet">Save changes</button>
       </div>
     </div>
   </div>
@@ -104,20 +126,57 @@
 </div>
 
 <script>
-  function handleSelectChange(select) {
-    const selectedOption = select.options[select.selectedIndex];
-    console.log("sele", selectedOption )
-    if (selectedOption.id === "AddNewPet") {
-      // Open the modal
-      $('#addPetModal').modal('show');
-      // Reset the select to the default option
-      select.selectedIndex = 0;
+  //update select dropdown
+  // window.onload=function(){
+
+  function constructSelectMenu(){
+    let petInfoEncodedString = {{ customer.metafields.custom.pet_info.value | json }};
+    let petInfo = JSON.parse(decodeURIComponent(petInfoEncodedString)) || [];
+    console.log({petInfo})
+    let options=['<option value="" selected>Select</option>'];
+  
+    for(let i=0;i<petInfo.length;i++){
+      let option=`<option value='${petInfo[i].id}'>${petInfo[i].name}</option>`;
+      options.push(option);
     }
+    options.push(`<option class="btn btn-primary" id="AddNewPet">Add New Pet</option>`);
+    console.log(document.getElementById("petSelect"))
+    document.getElementById("petSelect").innerHTML=options.join("\n")
   }
 
-  function addReport() {
-    // Handle the add report functionality here
-  }
+  constructSelectMenu();
+
+  let addPetBtn=document.getElementById("AddNewPet");
+  addPetBtn.addEventListener("click",()=>{
+     $('#addPetModal').modal('show');
+  })
+  
+  let addReportModalBt=document.getElementById("addReportModalBtn");
+  addReportModalBt.addEventListener("click",()=>{
+    let pet_id = document.getElementById("petSelect").value;
+    let url = new URLSearchParams(window.location.search);
+    let report_id= url.get('report_id')
+
+    console.log({petIdoNmODAL:pet_id})
+    if (!pet_id){
+      $("#pet-toast-body").text('Please select a pet')
+      $("#pet-toast").addClass(`alert-danger`);
+      $("#pet-toast").css({display : "inline-block"})
+      setTimeout(() => {
+        $("#pet-toast").removeClass(`alert-danger`);
+      $("#pet-toast").css({display : "none"})
+      }, 5000)
+      return 
+    }else{
+      console.log({report_id})
+      if(report_id){
+        console.log({ImInside: report_id})
+        return addReports(report_id);
+      }
+      $('#addReportModal').modal('show');
+    }
+  })
+
 </script> 
 
 {% schema %}
