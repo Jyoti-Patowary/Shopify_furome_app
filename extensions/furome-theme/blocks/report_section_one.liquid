@@ -1,0 +1,40 @@
+{% comment %} {% # theme-check-disable %} {% endcomment %}
+
+{% schema %}
+{
+  "name": "Report Section One",
+  "target": "section",
+  "stylesheet": "index.css",
+  "javascript": "app.js",
+  "settings": []
+}
+{% endschema %}
+
+<div class="Container">
+  <div class="imageText">
+    <div class="image">
+      <img src="{{ "Mask group1.png" | asset_img_url: 'large' }}" width="1320" height="21" loading="lazy"/>
+
+    </div>
+    <div class="text">
+      <div class="textSection">
+        <div class="petName">
+          <p>Cooper</p>
+        </div>
+        <div class="petDetails">
+          <p>Poodle Mix, male, 7 years old</p>
+        </div>
+      </div>
+       <img class="Divider" src="{{ "Mask group.png" | asset_img_url: 'large' }}" width="1320" height="21" loading="lazy"/>
+      <div class="textSection textSectionGap">
+        <div class="summary">
+          <p>Summary</p>
+        </div>
+        <div class="summaryDetails">
+          <p>We’ve evaluated Cooper’s vitamin, mineral, and metabolite profile and are pleased to report that he is overall very healthy for his breed and age.
+          He has a few disease risks that are worth bringing up with your vet, but with a few lifestyle changes and the right diet, it’s very possible to get ahead of them!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

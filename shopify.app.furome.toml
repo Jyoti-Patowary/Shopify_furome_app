@@ -1,0 +1,32 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+name = "furome-app"
+client_id = "45edeefd9b05b17e057d3c92e75533a6"
+application_url = "https://novelty-caution-virtually-ab.trycloudflare.com"
+embedded = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products"
+
+[auth]
+redirect_urls = [
+  "https://novelty-caution-virtually-ab.trycloudflare.com/auth/callback",
+  "https://novelty-caution-virtually-ab.trycloudflare.com/auth/shopify/callback",
+  "https://novelty-caution-virtually-ab.trycloudflare.com/api/auth/callback"
+]
+
+[webhooks]
+api_version = "2023-10"
+
+[app_proxy]
+url = "https://novelty-caution-virtually-ab.trycloudflare.com/api/proxy_route"
+subpath = "express-proxy"
+prefix = "apps"
+
+[pos]
+embedded = true
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "quickstart-b37ce774.myshopify.com"

@@ -1,0 +1,245 @@
+{% # theme-check-disable %}
+<div role="alert" style="position : absolute; top: 50px; right : 10px;display : none" class="alert" id="pet-toast">
+  <div class="toast-body" id="pet-toast-body">
+  </div>
+</div>
+
+<div class="loader-status" id="cloader">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<div class="main-hero container">
+  <div class="content">
+    <div class="left">
+      <div class="welcome">
+        <p class="welcome-message">Welcome,{{ customer.name }} 
+        {% comment %} <span id="userName"></span> {% endcomment %}
+      </p>
+      </div>
+    </div>
+    <div class="right">
+      <div class="select">
+        <select class="form-select" aria-label="Default select example" id="petSelect" onchange="handleSelectChange(this)">
+        </select>
+        {% comment %} <button type="button" class="btn btn-primary addReport"  id="AddNewPet">
+          Add New Pet
+        </button>{% endcomment %}
+        <button type="button" class="btn btn-primary addReport" id="addReportModalBtn">
+          Add Report
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add New Pet Modal -->
+{% comment %} <div class="modal fade" id="addPetModal" tabindex="-1" aria-labelledby="addReportLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addReportLabel">Add New Pet</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="petName" class="form-label">Pet Name</label>
+          {% comment %} {%raw%} page.metafields.custom.pet_name.value {%endraw%} {% endcomment %}
+          <input type="text" class="form-control" id="petName" data-pet-name="{{ page.metafields.custom.pet_name.value.name | escape }}">
+          {{page.metafields.custom.pet_name.value.name }}
+        </div>
+        <div class="mb-3">
+          <label for="petImage" class="form-label">Pet Image</label>
+          <input type="file" class="form-control" id="petImageInput" accept="image/*">
+          <img src="" alt="Pet Image" id="petImagePreview" style="max-width: 100%; display: none;">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="addPet()">Add Pet</button>
+      </div>
+    </div>
+  </div>
+</div> {% endcomment %}
+
+{% comment %} updated with metafield entry {% endcomment %}
+<div class="modal fade" id="addPetModal" tabindex="-1" aria-labelledby="addReportLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addReportLabel">Add New Pet</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="errorMessage" class="alert alert-danger" style="display: none;"></div>
+        <div class="mb-3">
+          <label for="petName" class="form-label">Pet Name</label>
+          <input type="text" class="form-control" id="petName" value="{{ page.metafields.custom.pet_name.value.name | escape }}" required>
+        </div>
+        <div class="mb-3">
+          <label for="yob" class="form-label">Year of Birth</label>
+          <input type="text" class="form-control" id="yob" value="{{ page.metafields.custom.pet_name.value.yob | escape }}" required>
+        </div>
+        <div class="mb-3">
+          <label for="type" class="form-label">Pet Species</label>
+          <select class="form-select" aria-label="Pet Species" id="type" required>
+            <option selected disabled>Select</option>
+            <option id="Dog">Dog</option>
+            <option id="Cat">Cat</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="petImage" class="form-label">Pet Image</label>
+          <input type="file" class="form-control" id="petImage" placeholder="Enter Pet Image URL" multiple>
+          {% comment %} <img src="{{ page.metafields.custom.pet_image.value.image_url | escape }}" alt="Pet Image" id="petImagePreview" style="max-width: 100%;"> {% endcomment %}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="addPetOn">Add Pet</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Add Report Modal -->
+<div class="modal fade" id="addReportModal" tabindex="-1" aria-labelledby="addReportLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addReportLabel">Search Report</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class= "modal-body">
+        <p class="modal-text-p">Please enter the report ID below to list your pet's report</p>
+        <input class="form-control form-control-sm" type="text" id="addReportSearch">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="addReportToPet">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+{% comment %} <div class="cardD container">
+    <div class="cardHeader">
+      <svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <rect y="0.805664" width="32" height="32" fill="url(#pattern0)"/>
+        <defs>
+        <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+        <use xlink:href="#image0_257_88" transform="scale(0.01)"/>
+        </pattern>
+        <image id="image0_257_88" width="100" height="100" xlink:href="data:image/png;base64,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"/>
+        </defs>
+        </svg>
+      <h2>Monthly Report</h2>
+    </div>
+    <div class="petCardDetails">
+      <div class="name">
+        <h3>Name :</h3>
+        <p>Bailey</p>
+      </div>
+      <div class="name">
+        <h3>Age :</h3>
+        <p>10</p>
+      </div>
+      <div class="name">
+        <h3>Date :</h3>
+        <p>
+          27 Jan 2024</p>
+      </div>
+      <div class="name">
+        <h3>Species :</h3>
+        <p>Dog</p>
+      </div>
+      <div class="name">
+        <h3>Month :</h3>
+        <p>Jan 2023</p>
+      </div>
+      <div class="buttonClass">
+        <button>Download</button>
+        <button>Open Report</button>
+    </div>
+
+</div> {% endcomment %}
+
+<div class="all-report" id="all-report">
+  
+</div>
+
+<script>
+
+
+
+  //update select dropdown
+  // window.onload=function(){
+
+ async function constructSelectMenu(){
+    let petInfo = await(await fetch('https://everfur.com/apps/express-proxy/customer/pets', {
+      method: "GET",
+      headers: {
+        "ngrok-skip-browser-warning": true,
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "http://everfur.com/"
+      },
+     
+    }))?.json()
+    
+    petInfo = petInfo.data || [] 
+    
+    console.log({petInfo})
+    let options=['<option value="" selected>Select</option>'];
+  
+    for(let i=0;i<petInfo.length;i++){
+      let option=`<option value='${petInfo[i].id}'>${petInfo[i].name}</option>`;
+      options.push(option);
+    }
+    options.push(`<option class="btn btn-primary" id="AddNewPet">Add New Pet</option>`);
+    console.log(document.getElementById("petSelect"))
+    document.getElementById("petSelect").innerHTML=options.join("\n")
+  }
+
+  constructSelectMenu();
+
+  let addPetBtn=document.getElementById("AddNewPet");
+  addPetBtn.addEventListener("click",()=>{
+     $('#addPetModal').modal('show');
+  })
+  
+  let addReportModalBt=document.getElementById("addReportModalBtn");
+  addReportModalBt.addEventListener("click",()=>{
+    let pet_id = document.getElementById("petSelect").value;
+    let url = new URLSearchParams(window.location.search);
+    let report_id= url.get('report_id')
+
+    console.log({petIdoNmODAL:pet_id})
+    if (!pet_id){
+      $("#pet-toast-body").text('Please select a pet')
+      $("#pet-toast").addClass(`alert-danger`);
+      $("#pet-toast").css({display : "inline-block"})
+      setTimeout(() => {
+        $("#pet-toast").removeClass(`alert-danger`);
+      $("#pet-toast").css({display : "none"})
+      }, 5000)
+      return 
+    }else{
+      console.log({report_id})
+      if(report_id){
+        console.log({ImInside: report_id})
+        return addReports(report_id);
+      }
+      $('#addReportModal').modal('show');
+    }
+  })
+
+</script> 
+
+{% schema %}
+{
+  "name": "Pets Dashboard",
+  "target": "section",
+  "stylesheet": "pets.css",
+  "javascript": "functions.js",
+  "settings": []
+}
+{% endschema %}

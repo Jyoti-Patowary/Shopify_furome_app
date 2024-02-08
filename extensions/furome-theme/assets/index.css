@@ -1,0 +1,767 @@
+:root {
+    --Dark-Green: #10462E;
+    --Cream: #F7F4EC;
+    --White: #FFF;
+    --Font-Azeret: 'Azeret';
+    --Font-Azeret-Mono: 'Azeret_Mono';
+}
+
+.Container {
+    padding: 0px 97px;
+}
+
+.firstContainer .thirdContainer {
+    background-color: var(--Cream);
+    padding: 30px 30px 0px 30px;
+    border-radius: 20px 20px 0px 0px;
+}
+
+.secondContainer {
+    background-color: #FFF;
+    border-radius: 20px 20px 0px 0px;
+}
+
+.thirdContainer {}
+
+.container {}
+
+.rlogo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 41px;
+}
+
+.imageText {
+    display: flex;
+    gap: 108px;
+}
+
+.image{
+    /* padding: 0px 100px; */
+}
+
+.image img{
+    width: 180.742px;
+height: 180.742px;
+
+    border-radius: 50%;
+    background-color: antiquewhite;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+}
+
+.textSection {
+    display: flex;
+    align-items: baseline;
+    gap: 78px;
+}
+
+.textSection .petName {
+    font-family: var(--Font-Azeret);
+    font-size: 30.422px;
+    line-height: 60.324px;
+    color: var(--Dark-Green);
+}
+
+.textSection .petDetails {
+    color: var(--Dark-Green);
+    font-family: var(--Font-Azeret-Mono);
+    font-size: 19.685px;
+    line-height: 103.5%;
+    text-transform: uppercase
+}
+
+hr {}
+
+.textSectionGap {
+    gap: 96px;
+}
+
+.textSection .summary {
+    font-family: var(--Font-Azeret);
+    font-size: 19.685px;
+    line-height: 60.324px;
+    color: var(--Dark-Green);
+}
+
+.textSection .summaryDetails {
+    color: var(--Dark-Green);
+    font-family: var(--Font-Azeret);
+    font-size: 19.685px;
+    line-height: 34.001px;
+}
+
+/* General Health Section */
+
+.gHeading{
+    display: flex;
+    gap: 89px;
+}
+
+.commonH2{
+    color: var(--Dark-Green);
+    font-family: var(--Font-Azeret);
+    font-size: 42.738px;
+    line-height: 60.324px;
+    /* width: 465px; */
+}
+
+.gh{
+    width: 70%;
+}
+
+.gDetails{
+    display: flex;
+    flex-direction: column;
+}
+
+.gDetails p{
+    color: var(--Dark-Green);
+    font-family: var(--Font-Azeret);
+    font-size: 30.422px;
+    line-height: 44.738px;
+}
+
+.gDetails .curious{
+    font-size: 19.685px;
+    line-height: 34.001px;
+    color: var(--Dark-Green);
+    font-family: var(--Font-Azeret); 
+}
+
+.gDetails .curious a{
+    font-size: 19.685px;
+    line-height: 34.001px;
+    color: var(--Dark-Green);
+    font-family: var(--Font-Azeret); 
+    text-decoration-line: underline;
+    font-weight: 700;
+}
+
+.card{
+    display:flex;
+    gap: 17.46px;
+    flex-direction: row;
+    padding-top: 51.62px;
+    border: none;
+}
+
+.cardsGroup{
+    width: 464.376px;
+    height: 251.263px;
+    border-radius: 26.843px;
+    background-color: var(--Cream);
+}
+
+.cardContent{
+    padding: 18px 17px;
+}
+
+.cardContent h2{
+    color: var(--Dark-Green);
+    font-family: var(--Font-Azeret); 
+    font-size: 30.422px;
+    line-height: 60.324px;
+    border-bottom: 1px solid var(--Dark-Green);
+}
+
+.gCircle{
+    display: flex;
+    padding: 31px 0px;
+    justify-content: center;
+}
+
+.gCircle .Circle{
+    width: 87.529px;
+    height: 87.529px;
+    border-radius: 50%;
+    background-color: var(--White);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10.737px;
+    text-transform: uppercase;
+}
+
+.navElements{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 53px;
+    font-family: var(--Font-Azeret-Mono);
+    font-size: 10.737px;
+    line-height: 103.5%; 
+    text-transform: uppercase;
+    padding-bottom: 47.42px;
+    border-bottom: 1.75px solid var(--Dark-Green);
+}
+
+.navElements .nSpacer{
+    display: flex;
+    gap: 12.86px;
+}
+
+.nCircle{
+    width: 79.64px;
+    height: 33.309px;
+    border-radius: 25.223px;
+    border: 1.75px solid var(--Dark-Green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navElements a{
+    text-decoration: none;
+    color: var(--Dark-Green);
+}
+
+.commonHeading{
+    display: flex;
+    gap: 18.06px;
+    align-items: center;
+    padding-top: 26.84px;
+}
+
+.Cards{
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    padding-top: 67.42px;
+    padding-bottom: 89.48px;
+    border-bottom: 1.75px solid var(--Dark-Green);
+}
+
+.cardInnerElements{
+    display: flex;
+    gap: 50px;
+    border-radius: 26.843px;
+    background: var(--Cream);
+    /* width: 705.021px;
+    height: 161.647px; */
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 17px;
+    white-space: pre;
+width: 617.021px;
+height: 161.647px;
+}
+
+.cardInnerElementsTwo {
+    /* display: flex; */
+    /* gap: 159.5px; */
+    border-radius: 26.843px;
+    background: var(--Cream);
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 17px;
+    /* width: 705.021px; */
+    /* height: 161.647px; */
+}
+
+.detailedElments{
+    display: flex;
+    flex-direction: column;
+}
+
+.cardInnerText{
+    display: flex;
+    flex-direction: column;
+    gap: 16.5px;
+}
+
+.InnerElements{
+    display: flex;
+    justify-content: space-between;
+}
+
+.diseaseTitle{
+    color: var(--Dark-Green, #10462E);
+    font-family: var(--Font-Azeret);
+    font-size: 30.422px;
+    line-height: 60.324px;
+}
+
+.learnMore{
+
+}
+
+.learnMore a{
+    color: var(--Dark-Green);
+    font-family: var(--Font-Azeret);
+    font-size: 16.106px;
+    line-height: 34.001px;
+    text-decoration-line: underline;
+}
+
+.CardsGroup{
+    display: flex;
+    gap: 18px;
+    align-items: baseline;
+    border-bottom: 1.75px solid var(--Dark-Green);
+
+}
+
+.CardsGroups{
+    display: flex;
+    gap: 18px;
+    align-items: baseline;
+    padding-bottom: 288px;
+}
+
+.dCards{
+        display: flex;
+        gap: 18px;
+        align-items: center;
+        padding-top: 67.42px;
+        padding-bottom: 89.48px;  
+        flex-direction: column;
+}
+
+.detailedCards{
+    width: 705.021px;
+    height: 341.19px;
+    background: var(--Cream);
+    border-radius: 26.843px;
+}
+
+.textDetailedElement{
+    display: flex;
+    flex-direction: column;
+    gap: 27px;
+}
+
+.textDetailedElement p{
+    color: var(--Dark-Green);
+    font-family: var(--Font-Azeret);
+    font-size: 16.106px;
+    line-height: 30.317px;
+}
+
+.Divider{
+    margin: 30px 0px 50px 0px;
+    width: 100%;
+}
+
+.spanText{
+    font-size: 16.106px;
+    color: var(--Dark-Green);
+    font-family: var(--Font-Azeret);
+}
+
+.slider{
+    /* width: 626.281px;
+    height: 230.849px; */
+    border-radius: 26.843px;
+    border: 0.895px dashed var(--Dark-Green);
+    padding: 53px 23px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+
+.avatar{
+    width: 151.364px;
+    height: 151.364px;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatarImage{
+    width: 90.523px;
+    height: 90.216px;
+}
+
+.sliderText p{
+    font-size: 14.648px;
+    line-height: 28.483px;
+    font-family: var(--Font-Azeret-Mono);
+    color: #10462E;
+}
+
+.sliderText h4{
+    font-size: 22.786px;
+    font-family: var(--Font-Azeret);
+    line-height: 37.137px;
+    text-decoration-line: underline;
+    color: #10462E;
+}
+
+.sliderText button{
+    width: 108.695px;
+background-color: var(--Dark-Green);
+color: var(--Cream);
+text-align: center;
+font-size: 9.765px;
+border-radius: 2.773px;
+height: 33.273px;
+}
+
+.lifetsyleDetails{
+
+}
+
+.lifestyleContainer{
+    display: flex;
+    gap: 24.65px;
+    padding: 10px 0px;
+}
+
+.lifestyleContainerOne{
+    display: flex;
+    flex-direction: column;
+    gap: 69.97px;
+}
+
+.lifetsyleDetailsContainer{
+    display: flex;
+    gap: 21.74px;
+}
+
+.detailOne{
+    width: 33.309px;
+    height: 33.309px;
+border-radius: 50%;
+border: 2px solid var(--Dark-Green);
+display: flex;
+    align-items: baseline;
+    justify-content: center;
+}
+
+.detailOne p{
+    font-size: 16.106px;
+    color: var(--Dark-Green);
+    font-family: var(--Font-Azeret);
+}
+
+.detailTwo{
+    width: 591.64px;
+}
+
+.detailTwo p{
+    font-size: 30.422px;
+    color: var(--Dark-Green);
+    font-family: var(--Font-Azeret);
+    line-height: 44.738px;
+}
+
+.lifestyleContainerTwo{
+    display: flex;
+    flex-direction: column;
+    gap: 43.61px;
+}
+
+.areyouvet{
+    display: flex;
+    flex-direction: column;
+    gap: 16.92px;
+}
+
+.areyouvetDetail{
+    width: 100%;
+    background-color: #F7F4EC;
+    border-radius: 26.843px;
+    padding: 34px 36px;
+}
+
+.vetPOne{
+    font-size: 16.106px;
+    font-family: var(--Font-Azeret-Mono);
+    color: var(--Dark-Green);
+
+}
+
+.vetPTwo{
+    font-size: 16.106px;
+    font-family: var(--Font-Azeret-Mono);
+    color: var(--Dark-Green);
+    
+}
+
+.appFooter{
+    padding-top: 85.2px;
+    display: flex;
+    flex-direction: column;
+    gap: 18.92px;
+}
+
+.appFooterText{
+    display: flex;
+    justify-content: center;
+}
+
+.appFooterText p{
+    width: 713.801px;
+    text-align: center;
+    font-family: var(--Font-Azeret);
+    color: var(--Dark-Green);
+    font-size: 19.685px;
+    line-height: 34.001px; 
+}
+
+.appFooterText a{
+    text-decoration: none;
+    color: var(--Dark-Green);
+    font-family: var(--Font-Azeret);
+    font-family: 'Azeret';
+    font-weight: 700;
+}
+
+.appFooterImage{
+    display: flex;
+    justify-content: center;
+}
+
+.appFooterImage img{
+    /* width: 100%;
+    max-width: 100%; */
+}
+
+.close{
+    display: flex;
+    gap: 10.12px;
+    
+align-items: baseline
+}
+
+.fq{
+    background-color: #97D2BE !important;
+}
+
+.ac{
+    background-color: #FFD6D1 !important;
+}
+
+.di{
+    background-color: #07C168 !important;
+}
+
+.hi{
+    background-color: #FF855C !important;
+}
+
+@media only screen and (max-width: 768px) {
+    .Container {
+        padding: 0 20px;
+    }
+
+    .firstContainer .thirdContainer {
+        padding: 20px;
+    }
+
+    .rlogo {
+        padding: 20px;
+        width: unset !important;
+    }
+
+    .rlogo img{
+        max-width: 100%;
+        height: auto;
+    }
+
+    .imageText {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
+
+    .image img {
+        max-width: 100%;
+    }
+
+    .textSection {
+        flex-direction: column;
+    align-items: center;
+    gap: 1px;
+    }
+
+    .petDetails{
+        text-align: center;
+        line-height: normal;
+
+    }
+
+    .summary p{
+        font-size: 28px !important;
+    }
+
+    .commonH2{
+        font-size: 28px;
+    }
+
+    .summaryDetails{
+        font-size: 16px;
+        line-height: 174%;
+    }
+
+    .textSectionGap {
+        align-items: flex-start !important;
+    }
+
+    .gHeading {
+        gap: 20px;
+        flex-direction: column;
+    }
+
+    .gDetails p{
+        font-size: 16px;
+    line-height: 174%;
+    }
+
+    .curious p a{
+        font-size: 16px !important;
+    line-height: 174%;
+    }
+
+    .card{
+        flex-direction: column;
+    }
+
+    .cardsGroup{
+        width: 100%;
+        height: auto;
+
+    }
+
+    .cardContent h2 {
+        font-size: 28px;
+    }
+
+    .gCircle .Circle {
+        width: 95.529px;
+        height: 87.529px !important;
+        font-size: 7.737px !important;
+    }
+
+    .navElements {
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 20px;
+        padding-bottom: 20px;
+        scroll-behavior: smooth;
+        overflow: hidden;
+    }
+
+    .disease{
+        white-space: nowrap;
+    }
+
+    .nCircle {
+        width: 100%;
+        height: auto;
+        padding: 10px;
+    }
+
+    .Cards{
+        padding-top: 20px;
+    padding-bottom: 20px;
+    flex-direction: column;
+    }
+
+    .CardsGroup{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .dCards{
+        padding-top: 20px;
+        padding-bottom: 20px;
+        width: 100%;
+    }
+
+    .detailedCards{
+        margin-bottom: 50px;
+    }
+
+    .cardInnerElements{
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+        gap: unset;
+        align-items: flex-start;
+    }
+
+    .cardInnerText{
+        flex-direction: column;
+    align-items: baseline;
+    gap: unset;
+    }
+
+    .gCircle .CircleM{
+        width: 97.529px;
+        height: 84.97.529px !important;;
+        font-size: 7.737px !important;
+        display: flex;
+        background-color: white;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+    }
+
+    .cardInnerElementsTwo{
+        width: 100%;
+
+    }
+
+    .detailedCards{
+        width: 100%;
+        height: auto !important;
+    }
+
+    .InnerElements{
+        flex-direction: column;
+    }
+
+    .detailedElments {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .diseaseTitle{
+        font-size: 28px;
+    }
+   
+    .lifestyleContainer{
+        flex-direction: column;
+    }
+
+    .lifestyleContainerOne{
+        gap: 30px
+    }
+
+    .detailOne {
+        width: 64px;
+        height: 30px;
+    }
+
+    .detailTwo p {
+        font-size: 16px;
+    }
+
+    .areyouvetDetail {
+        width: 100%;
+    }
+
+    .vetPTwo {
+        font-size: 14px;
+    }
+
+    .appFooterText p {
+        width: 100%;
+        font-size: 16px;
+        text-align: left;
+    }
+
+    .appFooterImage img {
+        width: 100%;
+        height: auto;
+    }
+}

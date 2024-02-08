@@ -1,0 +1,295 @@
+.main-hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px;
+  background-color: #f1ebd8;
+  color: #10462e;
+  margin-top: 50px;
+  border-radius: 20px;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.left {
+  flex: 1;
+  text-align: left;
+}
+
+.right {
+  flex: 1;
+  text-align: right;
+
+}
+
+.select {
+  display: flex;
+  gap: 11px;
+}
+
+.text-area, .select {
+  display: flex;
+  position: unset !important;
+  width: 100%;
+}
+
+.form-label{
+  color: #10462E;
+}
+
+.form-select {
+  font-size: 15px !important;
+  border: none;
+  background-color: white;
+  height: 43px;
+  border-radius: 4px !important;
+}
+
+.form-control[type=file]:not(:disabled):not([readonly]) {
+  cursor: pointer;
+  font-size: 13px;
+  padding: 11px 7px;
+}
+
+#addPetOn{
+width: 100% !important;
+}
+
+#addReportModalBtn{
+  width: 28% !important;
+}
+
+.btn {
+  width: 28%;
+  font-size: small;
+  font-weight: 500;
+  padding: 11px;
+  background-color:#10462e;
+  color: white;
+}
+
+.welcome-message {
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.modal-text-p {
+  text-align: justify;
+  color: black;
+}
+
+.modal-body {
+  padding: 20px 0 !important;
+}
+
+.form-control {
+  border: none;
+  background-color: white;
+  height: 43px;
+  border-radius: 4px;
+}
+
+.form-control-sm {
+  margin-top: 10px;
+  font-size: large;
+}
+
+.all-report {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin: 30px 20px;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: #F7F4EC !important;
+  padding: 20px 30px;
+}
+
+.modal-title {
+  /* font-size: inherit; */
+  /* position: relative;
+  left: 133px; */
+  font-family: 'Azeret_Mono';
+  font-size: 20px;
+  padding: 4px 0;
+  font-weight: 500;
+  color: #10462E;
+}
+
+.m-report {
+  height: auto;
+  background-color: gainsboro;
+  border-radius: 10px;
+  width: 20%;
+}
+
+.m-report h4 {
+  border-bottom: 1px solid;
+  font-size: x-large;
+}
+
+.btn {
+  width: auto;
+}
+
+@media (max-width: 768px) {
+  .main-hero {
+    padding: 40px 10px;
+    margin: 0px;
+  }
+
+  #addReportModalBtn {
+    width: 100% !important;
+}
+
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .right {
+    width: 76%;
+  }
+
+  .select {
+    /* display: block; */
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* .modal-title {
+    left: 90px;
+  } */
+
+  .modal {
+    width: 100% !important;
+  }
+
+  .modal-content {
+    padding: 20px;
+    margin: 0;
+  }
+
+  .form-control-sm {
+    font-size: large;
+  }
+
+  .addReport {
+    width: inherit !important;
+  }
+
+  .btn {
+    width: 49%;
+    font-size: small;
+    font-weight: 500;
+    padding: 11px;
+    margin: 20px 0px;
+  }
+
+  .welcome-message {
+    font-size: 25px;
+  }
+
+  .m-report {
+    width: 20.5em;
+    margin-bottom: 30px;
+  }
+}
+
+
+.loader-status {
+  display: none;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.95);
+  z-index: 1;
+}
+
+.loader-status-show {
+  display: flex !important;
+}
+
+.spinner-border {
+  width: 80px;
+  height: 80px;
+}
+
+
+
+
+/* New Card */
+
+.cardD {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  /* justify-content: center; */
+  margin-top: 50px;
+  /* transform: translate(501px, 10px); */
+  background-color: #edebdf;
+  width: 19%;
+  padding: 20px;
+  border-radius: 20px;
+
+}
+
+.cardHeader{
+  display: flex;
+  align-items: stretch;
+  gap: 13px;
+  padding-bottom: 20px;
+}
+
+.cardHeader img{
+
+}
+
+.cardHeader h2{
+  color: #10462E;
+  font-weight: 600;
+}
+
+.petCardDetails{
+
+}
+
+.name{
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  
+}
+
+.name h3{
+  color: #10462E;
+  font-weight: 600;
+}
+
+.name p{
+  color: #10462E;
+}
+
+.buttonClass button{
+  background-color: #10462E;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  padding: 8px 20px;
+}
